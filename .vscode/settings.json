@@ -1,0 +1,4 @@
+{
+    "python.analysis.typeCheckingMode": "basic",
+    "isort.args": ["CUDA_LAUNCH_BLOCKING=1"]
+}
