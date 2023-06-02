@@ -4,7 +4,7 @@ from kazoo.exceptions import NodeExistsError, NoNodeError
 
 class ZookeeperClient:
     def __init__(self, ip, port):
-        self.zkClient = KazooClient(hosts=str(ip)+':'+str(port))
+        self.zkClient = KazooClient(hosts=str(ip) + ':' + str(port))
         self.zkClient.start()
 
     def createNode(self, path, value):
@@ -59,7 +59,7 @@ class ZookeeperClient:
 
 
 if __name__ == "__main__":
-    zkClient = ZookeeperClient(ip="127.0.0.1", port="2181")
+    zkClient = ZookeeperClient(ip="127.0.0.1", port="22181")
     # Test create function
     zkClient.createNode("/test", "HelloWorld")
     zkClient.createNode("/test/child", "I am the child of test")
