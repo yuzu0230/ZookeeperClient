@@ -1,4 +1,6 @@
 from confluent_kafka.admin import AdminClient, NewTopic
+
+
 if __name__ == "__main__":
     a = AdminClient({'bootstrap.servers': '127.0.0.1:19092,127.0.0.1:29092,127.0.0.1:39092'})
 
