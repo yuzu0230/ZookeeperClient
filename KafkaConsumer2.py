@@ -2,7 +2,7 @@ from kafka import KafkaConsumer
 from json import loads
 import matplotlib.pyplot as plt
 
-# Kafka 設定
+# Kafka setting
 TOPIC_NAME = "test1"
 BOOTSTRAP_SERVERS = ["127.0.0.1:19092", "127.0.0.1:29092", "127.0.0.1:39092"]
 
@@ -14,7 +14,6 @@ consumer = KafkaConsumer(
 
 event_types = ['view', 'cart', 'remove_from_cart', 'purchase']
 
-# 初始化交易區間和交易數量字典
 price_ranges = {
     "0-10": {event_type: 0 for event_type in event_types},
     "10-20": {event_type: 0 for event_type in event_types},
@@ -24,11 +23,9 @@ price_ranges = {
     ">50": {event_type: 0 for event_type in event_types}
 }
 
-# 創建大圖和四個子圖
 fig, axes = plt.subplots(2, 2, figsize=(10, 6))
 fig.tight_layout(pad=3.5)
 
-# 每個子圖的標題和 x、y 軸標籤
 titles = ["View", "Cart", "Remove from Cart", "Purchase"]
 x_label = "Price Range"
 y_label = "Transaction Count"
@@ -55,6 +52,7 @@ def update_graph():
 
     plt.draw()
 
+# read data from topic
 for msg in consumer:
     event_type = msg.value["event_type"]
     price = msg.value["price"]
@@ -73,6 +71,5 @@ for msg in consumer:
     elif price > 50:
         price_ranges[">50"][event_type] += 1
 
-    # 更新圖表
     update_graph()
     plt.pause(0.01)

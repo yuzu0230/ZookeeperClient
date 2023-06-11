@@ -8,8 +8,8 @@ from matplotlib.dates import DateFormatter
 TOPIC_NAME = "test1"
 BOOTSTRAP_SERVERS = ["127.0.0.1:19092", "127.0.0.1:29092", "127.0.0.1:39092"]
 
+# max size in x-axis
 LIMIT = 20
-UPDATE_INTERVAL = 1000
 
 consumer = KafkaConsumer(
     TOPIC_NAME,
@@ -38,10 +38,8 @@ def update_graph():
     ax.set_ylim(0, max(prices))
     plt.draw()
 
+# read data from topic
 for msg in consumer:
-    # if len(prices) == 1:
-    #     print(msg)
-
     datetime_str = msg.value["event_time"][:19]
     dt = datetime.strptime(datetime_str, "%Y-%m-%d %H:%M:%S")
 
